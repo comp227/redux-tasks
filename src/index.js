@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {createStore} from 'redux'
 
 const counterReducer = (state = 0, action) => {
     switch (action.type) {
@@ -13,6 +14,8 @@ const counterReducer = (state = 0, action) => {
             return state
     }
 }
+
+const store = createStore(counterReducer)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<div>Hello World!</div>);
