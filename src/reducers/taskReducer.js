@@ -1,7 +1,6 @@
 const taskReducer = (state = [], action) => {
     if (action.type === 'NEW_TASK') {
-        state.push(action.payload)
-        return state
+        return state.concat(action.payload)
     }
 
     return state
