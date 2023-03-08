@@ -1,12 +1,5 @@
 import {createStore} from "redux";
-
-const taskReducer = (state = [], action) => {
-    if (action.type === 'NEW_TASK') {
-        return state.concat(action.payload)
-    }
-
-    return state
-}
+import taskReducer from "./reducers/taskReducer";
 
 const store = createStore(taskReducer)
 
