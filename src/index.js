@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import {createStore} from 'redux'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 
+import { createStore } from 'redux'
 
 const counterReducer = (state = 0, action) => {
     switch (action.type) {
@@ -11,23 +11,43 @@ const counterReducer = (state = 0, action) => {
             return state - 1
         case 'ZERO':
             return 0
-        default: // if none of the above matches, code comes here
+        default:
             return state
     }
 }
 
 const store = createStore(counterReducer)
 
-store.subscribe(() => {
-    const storeNow = store.getState()
-    console.log("breaking news! " + storeNow)
-})
+const App = () => {
+    return (
+        <div>
+            <div>
+                {store.getState()}
+            </div>
+            <button
+                onClick={e => store.dispatch({ type: 'INCREMENT' })}
+            >
+                plus
+            </button>
+            <button
+                onClick={e => store.dispatch({ type: 'DECREMENT' })}
+            >
+                minus
+            </button>
+            <button
+                onClick={e => store.dispatch({ type: 'ZERO' })}
+            >
+                zero
+            </button>
+        </div>
+    )
+}
 
-store.dispatch({ type: 'INCREMENT' })
-store.dispatch({ type: 'INCREMENT' })
-store.dispatch({ type: 'INCREMENT' })
-store.dispatch({ type: 'ZERO' })
-store.dispatch({ type: 'DECREMENT' })
+const root = ReactDOM.createRoot(document.getElementById('root'))
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<div>Hello World!</div>);
+const renderApp = () => {
+    root.render(<App />)
+}
+
+renderApp()
+store.subscribe(renderApp)
