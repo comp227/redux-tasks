@@ -23,5 +23,11 @@ store.subscribe(() => {
     console.log("breaking news! " + storeNow)
 })
 
+store.dispatch({ type: 'INCREMENT' })
+store.dispatch({ type: 'INCREMENT' })
+store.dispatch({ type: 'INCREMENT' })
+store.dispatch({ type: 'ZERO' })
+store.dispatch({ type: 'DECREMENT' })
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<div>Hello World!</div>);
