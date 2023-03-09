@@ -18,4 +18,25 @@ const taskReducer = (state = [], action) => {
     }
 }
 
+const generateId = () =>
+    Number((Math.random() * 1000000).toFixed(0))
+
+export const createTask = (content) => {
+    return {
+        type: 'NEW_TASK',
+        payload: {
+            content,
+            important: false,
+            id: generateId()
+        }
+    }
+}
+
+export const toggleImportanceOf = (id) => {
+    return {
+        type: 'TOGGLE_IMPORTANCE',
+        payload: { id }
+    }
+}
+
 export default taskReducer

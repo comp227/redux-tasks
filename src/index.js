@@ -1,6 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from "./App";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+import App from './App'
+import taskReducer from './reducers/taskReducer'
+
+const store = createStore(taskReducer)
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <Provider store={store}>
+        <App />
+    </Provider>
+)
