@@ -24,27 +24,34 @@ store.dispatch({
 const generateId = () =>
     Number((Math.random() * 1000000).toFixed(0))
 
+const createTask = (content) => {
+    return {
+        type: 'NEW_TASK',
+        payload: {
+            content,
+            important: false,
+            id: generateId()
+        }
+    }
+}
+
+const toggleImportanceOf = (id) => {
+    return {
+        type: 'TOGGLE_IMPORTANCE',
+        payload: { id }
+    }
+}
+
 const App = () => {
     const addTask = (event) => {
         event.preventDefault()
         const content = event.target.task.value
         event.target.task.value = ''
-        store.dispatch({
-            type: 'NEW_TASK',
-            payload: {
-                content,
-                important: false,
-                id: generateId()
-            }
-        })
+        store.dispatch(createTask(content))
     }
 
     const toggleImportance = (id) => {
-        console.log("toggle", id)
-        store.dispatch({
-            type: 'TOGGLE_IMPORTANCE',
-            payload: { id }
-        })
+        store.dispatch(toggleImportanceOf(id))
     }
 
     return(
