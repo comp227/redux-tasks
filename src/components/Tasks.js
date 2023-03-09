@@ -5,14 +5,14 @@ const Task = ({ task, handleClick }) => {
     return(
         <li onClick={handleClick}>
             {task.content}
-            <strong> {task.important ? 'important' : ''}</strong>
+            <strong> {task.important ? '- important' : ''}</strong>
         </li>
     )
 }
 
 const Tasks = () => {
     const dispatch = useDispatch()
-    const tasks = useSelector(state => state)
+    const tasks = useSelector(state => state.tasks)
 
     return(
         <ul>
