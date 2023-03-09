@@ -1,22 +1,12 @@
 import Tasks from "./components/Tasks";
 import NewTask from "./components/NewTask";
+import VisibilityFilter from "./components/VisibilityFilter";
 
 const App = () => {
-    const filterSelected = (value) => {
-        console.log(value)
-    }
-
     return (
         <div>
             <NewTask/>
-            <div>
-                <input type="radio" name="filter"
-                       onChange={() => filterSelected('ALL')}/>all
-                <input type="radio" name="filter"
-                       onChange={() => filterSelected('IMPORTANT')}/>important
-                <input type="radio" name="filter"
-                       onChange={() => filterSelected('UNIMPORTANT')}/>unimportant
-            </div>
+            <VisibilityFilter/>
             <Tasks/>
         </div>
     )
