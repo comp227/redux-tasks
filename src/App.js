@@ -21,12 +21,44 @@ store.dispatch({
     }
 })
 
+const generateId = () =>
+    Number((Math.random() * 1000000).toFixed(0))
+
 const App = () => {
+    const addTask = (event) => {
+        event.preventDefault()
+        const content = event.target.task.value
+        event.target.task.value = ''
+        store.dispatch({
+            type: 'NEW_TASK',
+            payload: {
+                content,
+                important: false,
+                id: generateId()
+            }
+        })
+    }
+
+    const toggleImportance = (id) => {
+        console.log("toggle", id)
+        store.dispatch({
+            type: 'TOGGLE_IMPORTANCE',
+            payload: { id }
+        })
+    }
+
     return(
         <div>
+            <form onSubmit={addTask}>
+                <input name="task" />
+                <button type="submit">add</button>
+            </form>
             <ul>
                 {store.getState().map(task=>
-                    <li key={task.id}>
+                    <li
+                        key={task.id}
+                        onClick={() => toggleImportance(task.id)}
+                    >
                         {task.content}<strong>{task.important ? ' - important' : ''}</strong>
                     </li>
                 )}
