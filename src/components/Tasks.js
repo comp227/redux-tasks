@@ -12,13 +12,13 @@ const Task = ({ task, handleClick }) => {
 
 const Tasks = () => {
     const dispatch = useDispatch()
-    const tasks = useSelector(state => {
-        if ( state.filter === 'ALL' ) {
-            return state.tasks
+    const tasks = useSelector(({filter, tasks}) => {
+        if ( filter === 'ALL' ) {
+            return tasks
         }
-        return state.filter  === 'IMPORTANT'
-            ? state.tasks.filter(task => task.important)
-            : state.tasks.filter(task => !task.important)
+        return filter  === 'IMPORTANT'
+            ? tasks.filter(task => task.important)
+            : tasks.filter(task => !task.important)
     })
 
     return(
