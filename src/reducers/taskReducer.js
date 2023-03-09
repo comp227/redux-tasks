@@ -1,4 +1,17 @@
-const taskReducer = (state = [], action) => {
+const initialState = [
+    {
+        content: 'remind myself that the reducer defines how the redux store works',
+        important: true,
+        id: 1,
+    },
+    {
+        content: 'repeat the words: a redux store can contain any data',
+        important: false,
+        id: 2,
+    },
+]
+
+const taskReducer = (state = initialState, action) => {
     switch(action.type) {
         case 'NEW_TASK':
             return [...state, action.payload]
