@@ -6,8 +6,6 @@ import { Provider } from 'react-redux'
 import App from './App'
 import taskReducer from './reducers/taskReducer'
 import filterReducer from "./reducers/filterReducer";
-import { createTask } from './reducers/taskReducer'
-import { filterChange } from './reducers/filterReducer'
 
 const reducer = combineReducers({
     tasks: taskReducer,
@@ -16,10 +14,6 @@ const reducer = combineReducers({
 
 const store = createStore(reducer)
 console.log(store.getState())
-
-store.subscribe(() => console.log(store.getState()))
-store.dispatch(filterChange('IMPORTANT'))
-store.dispatch(createTask('remember that combineReducers forms one reducer from many simple reducers'))
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
