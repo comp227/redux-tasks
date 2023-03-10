@@ -31,10 +31,13 @@ const taskSlice = createSlice({
             return state.map(task =>
                 task.id !== id ? task : changedTask
             )
+        },
+        appendTask(state, action) {
+            state.push(action.payload)
         }
     },
 })
 
-export const { createTask, toggleImportanceOf } = taskSlice.actions
+export const { createTask, toggleImportanceOf, appendTask } = taskSlice.actions
 
 export default taskSlice.reducer
