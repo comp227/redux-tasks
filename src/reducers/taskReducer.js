@@ -34,10 +34,13 @@ const taskSlice = createSlice({
         },
         appendTask(state, action) {
             state.push(action.payload)
+        },
+        setTasks(state, action) {
+            return action.payload
         }
     },
 })
 
-export const { createTask, toggleImportanceOf, appendTask } = taskSlice.actions
+export const { createTask, toggleImportanceOf, appendTask, setTasks } = taskSlice.actions
 
 export default taskSlice.reducer

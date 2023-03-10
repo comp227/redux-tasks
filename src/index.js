@@ -5,7 +5,7 @@ import {applyMiddleware, configureStore} from '@reduxjs/toolkit'
 
 import App from './App'
 import taskService from './services/tasks'
-import taskReducer, {appendTask} from './reducers/taskReducer'
+import taskReducer, {setTasks} from './reducers/taskReducer'
 import filterReducer from "./reducers/filterReducer";
 
 const store = configureStore({
@@ -16,9 +16,7 @@ const store = configureStore({
 })
 
 taskService.getAll().then(tasks =>
-    tasks.forEach(task => {
-        store.dispatch(appendTask(task))
-    })
+    store.dispatch(setTasks(tasks))
 )
 
 console.log(store.getState())
