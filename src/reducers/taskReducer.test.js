@@ -2,24 +2,21 @@ import taskReducer from './taskReducer'
 import deepFreeze from 'deep-freeze'
 
 describe('taskReducer', () => {
-    test('returns new state with action NEW_TASK', () => {
+    test('returns new state with action tasks/createTask', () => {
         const state = []
         const action = {
-            type: 'NEW_TASK',
-            payload: {
-                content: 'learn more about how the app state is in redux store',
-                important: true,
-                id: 1
-            }
+            type: 'tasks/createTask',
+            payload: 'learn more about how the app state is in redux store',
         }
 
         deepFreeze(state)
         const newState = taskReducer(state, action)
 
         expect(newState).toHaveLength(1)
-        expect(newState).toContainEqual(action.payload)
+        expect(newState.map(s => s.content)).toContainEqual(action.payload)
     })
-    test('returns new state with action TOGGLE_IMPORTANCE', () => {
+
+    test('returns new state with action tasks/toggleImportanceOf', () => {
         const state = [
             {
                 content: 'learn more about how the app state is in redux store',
@@ -33,10 +30,8 @@ describe('taskReducer', () => {
             }]
 
         const action = {
-            type: 'TOGGLE_IMPORTANCE',
-            payload: {
-                id: 2
-            }
+            type: 'tasks/toggleImportanceOf',
+            payload: 2
         }
 
         deepFreeze(state)

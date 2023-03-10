@@ -1,3 +1,5 @@
+import { createSlice } from '@reduxjs/toolkit'
+
 const initialState = [
     {
         content: 'remind myself that the reducer defines how the redux store works',
@@ -11,45 +13,39 @@ const initialState = [
     },
 ]
 
-const taskReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case 'NEW_TASK':
-            return [...state, action.payload]
-        case 'TOGGLE_IMPORTANCE': {
-            const id = action.payload.id
+const generateId = () =>
+    Number((Math.random() * 1000000).toFixed(0))
+
+const taskSlice = createSlice({
+    name: 'tasks',
+    initialState,
+    reducers: {
+        createTask(state, action) {
+            const content = action.payload
+
+            state.push({
+                content,
+                important: false,
+                id: generateId(),
+            })
+        },
+        toggleImportanceOf(state, action) {
+            const id = action.payload
+
             const taskToChange = state.find(t => t.id === id)
+
             const changedTask = {
                 ...taskToChange,
                 important: !taskToChange.important
             }
+
             return state.map(task =>
                 task.id !== id ? task : changedTask
             )
         }
-        default:
-            return state
-    }
-}
+    },
+})
 
-const generateId = () =>
-    Number((Math.random() * 1000000).toFixed(0))
+export const { createTask, toggleImportanceOf } = taskSlice.actions
 
-export const createTask = (content) => {
-    return {
-        type: 'NEW_TASK',
-        payload: {
-            content,
-            important: false,
-            id: generateId()
-        }
-    }
-}
-
-export const toggleImportanceOf = (id) => {
-    return {
-        type: 'TOGGLE_IMPORTANCE',
-        payload: { id }
-    }
-}
-
-export default taskReducer
+export default taskSlice.reducer
