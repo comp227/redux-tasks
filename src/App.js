@@ -12,7 +12,7 @@ const App = () => {
         taskService.getAll().then(tasks =>
             dispatch(setTasks(tasks))
         )
-    }, [])
+    }, [dispatch])
     return (
         <div>
             <NewTask/>
