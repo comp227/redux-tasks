@@ -9,8 +9,7 @@ const NewTask = () => {
         event.preventDefault()
         const content = event.target.task.value
         event.target.task.value = ''
-        const newTask = await taskService.createNew(content)
-        dispatch(createTask(newTask))
+        dispatch(createTask(content))
     }
 
     return (

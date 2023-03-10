@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import taskService from '../services/tasks'
 
 const taskSlice = createSlice({
     name: 'tasks',
@@ -33,5 +34,12 @@ const taskSlice = createSlice({
 })
 
 export const { createTask, toggleImportanceOf, appendTask, setTasks } = taskSlice.actions
+
+export const initializeTasks = () => {
+    return async dispatch => {
+        const tasks = await taskService.getAll()
+        dispatch(setTasks(tasks))
+    }
+}
 
 export default taskSlice.reducer

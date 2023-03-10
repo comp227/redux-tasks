@@ -3,15 +3,12 @@ import NewTask from "./components/NewTask";
 import VisibilityFilter from "./components/VisibilityFilter";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
-import taskService from "./services/tasks";
-import {setTasks} from "./reducers/taskReducer";
+import {initializeTasks} from "./reducers/taskReducer";
 
 const App = () => {
     const dispatch = useDispatch()
     useEffect(() => {
-        taskService.getAll().then(tasks =>
-            dispatch(setTasks(tasks))
-        )
+        dispatch(initializeTasks())
     }, [dispatch])
     return (
         <div>
