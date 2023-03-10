@@ -39,6 +39,8 @@ const taskSlice = createSlice({
                 important: !taskToChange.important
             }
 
+            console.log(JSON.parse(JSON.stringify(state)))
+
             return state.map(task =>
                 task.id !== id ? task : changedTask
             )
