@@ -1,6 +1,5 @@
 import {useDispatch} from 'react-redux'
 import {createTask} from '../reducers/taskReducer'
-import taskService from '../services/tasks'
 
 const NewTask = () => {
     const dispatch = useDispatch()

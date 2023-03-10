@@ -5,9 +5,6 @@ const taskSlice = createSlice({
     name: 'tasks',
     initialState: [],
     reducers: {
-        createTask(state, action) {
-            state.push(action.payload)
-        },
         toggleImportanceOf(state, action) {
             const id = action.payload
 
@@ -33,12 +30,19 @@ const taskSlice = createSlice({
     },
 })
 
-export const { createTask, toggleImportanceOf, appendTask, setTasks } = taskSlice.actions
+export const { toggleImportanceOf, appendTask, setTasks } = taskSlice.actions
 
 export const initializeTasks = () => {
     return async dispatch => {
         const tasks = await taskService.getAll()
         dispatch(setTasks(tasks))
+    }
+}
+
+export const createTask = content => {
+    return async dispatch => {
+        const newTask = await taskService.createNew(content)
+        dispatch(appendTask(newTask))
     }
 }
 
