@@ -1,11 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
-import {applyMiddleware, configureStore} from '@reduxjs/toolkit'
+import {Provider} from 'react-redux'
+import {configureStore} from '@reduxjs/toolkit'
 
 import App from './App'
-import taskService from './services/tasks'
-import taskReducer, {setTasks} from './reducers/taskReducer'
+import taskReducer from './reducers/taskReducer'
 import filterReducer from "./reducers/filterReducer";
 
 const store = configureStore({
@@ -15,14 +14,10 @@ const store = configureStore({
     }
 })
 
-taskService.getAll().then(tasks =>
-    store.dispatch(setTasks(tasks))
-)
-
 console.log(store.getState())
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
-        <App />
+        <App/>
     </Provider>
 )
