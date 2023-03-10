@@ -1,14 +1,16 @@
 import {useDispatch} from 'react-redux'
 import {createTask} from '../reducers/taskReducer'
+import taskService from '../services/tasks'
 
 const NewTask = () => {
     const dispatch = useDispatch()
 
-    const addTask = (event) => {
+    const addTask = async (event) => {
         event.preventDefault()
         const content = event.target.task.value
         event.target.task.value = ''
-        dispatch(createTask(content))
+        const newTask = await taskService.createNew(content)
+        dispatch(createTask(newTask))
     }
 
     return (
